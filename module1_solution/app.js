@@ -2,7 +2,11 @@
   'use strict'
 
   angular.module('LunchCheck', [])
-  .controller('LunchController', function($scope) {
+  .controller('LunchCheckController', LunchController);
+
+  LunchController.$inject = ['$scope'];
+
+  function LunchController($scope) {
     $scope.dishes = ""; // comma separated string of dishes
     $scope.message = "";
     $scope.check = function() {
@@ -13,8 +17,8 @@
       }
       $scope.message = ToMuch(dishes, 3) ? "Too much!" : "Enjoy!";
     };
-  });
-
+  }
+  
   function ToMuch(dishes, limit) {
     var items = dishes.split(',');
     var count = 0
