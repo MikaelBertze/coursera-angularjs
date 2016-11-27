@@ -21,12 +21,20 @@
 
     // functions
     vm.narrow = function() {
-      vm.searchResultVisible = false;
-      var result = menuSearch.getMatchedMenuItems(vm.searchTerm, vm.ignoreCase);
-      result.then(function(result) {
+      vm.searchResultVisible = false; // hide search result during search.
+      vm.found = []; // clear old result.
+
+      if (vm.searchTerm) {
+        var result = menuSearch.getMatchedMenuItems(vm.searchTerm, vm.ignoreCase);
+        result.then(function(result) {
+          vm.found = result;
+          vm.searchResultVisible = true;
+        })
+      }
+      else {
+        // no search term. Show empty result.
         vm.searchResultVisible = true;
-        vm.found = result;
-      })
+      }
     };
 
     vm.remove = function(index) {
@@ -43,7 +51,6 @@
       scope: {
         found: '<',
         onRemove: '&',
-        nothingFound: '<' // adding to scope to be able to controll initial state
       },
       controller: FoundItemsDirectiveController,
       controllerAs: 'foundItems',
