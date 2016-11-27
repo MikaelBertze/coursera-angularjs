@@ -1,0 +1,14 @@
+
+<div class="found-items">
+    <div class="container found-item" ng-repeat="item in foundItems.found">
+      <div style="float:left;">
+        <button class="btn" ng-click="foundItems.onRemove({index: $index});">Nope!</button>
+      </div>
+      <div style="float:left; margin-left:30px;">
+        <p class="item-name">({{item.short_name}}) {{item.name}} <br><p class="item-description">-{{item.description}}</p></p>
+      </div>
+    </div>
+    <div ng-if="foundItems.found.length == 0">
+      Nothing found :-(
+    </div>
+</div>
